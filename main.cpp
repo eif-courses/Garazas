@@ -20,7 +20,7 @@ struct Autoservisas {
 struct Klientas {
     Autoservisas autoservisas;
     std::string vardas;
-    std::vector<Gedimas> gedimai;
+    std::map<int, Gedimas> gedimai;
 
     void pateiktiGedima(Gedimas g);
 
@@ -124,11 +124,10 @@ void Meistras::tvarkytiAutomobili(Automobilis automobilis) {
 }
 
 void Klientas::pateiktiGedima(Gedimas g) {
+    gedimai[g.id] = g;
 
-    gedimai.push_back(g);
-
-
-
+    // map<int, Gedimas>
+    gedimai[1] = g;
 
 
 }
@@ -137,8 +136,8 @@ void Klientas::gedimuSarasas() {
 
     std::cout << "================GEDIMU SARASAS=========================\n";
 
-    for (Gedimas g: gedimai) {
-        std::cout << "pav: " << g.pavadinimas << "arSugedes: " << g.arSugedes << "bukle: " << g.procentaliai
+    for (auto elem: gedimai) {
+        std::cout << "pav: " << elem.second.pavadinimas << "arSugedes: " << elem.second.arSugedes << "bukle: " << elem.second.procentaliai
                   << std::endl;
     }
 
